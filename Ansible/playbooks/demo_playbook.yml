@@ -1,0 +1,15 @@
+---
+- name: Playbook Demo
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Print Router hostname
+      ansible.builtin.debug:
+       msg:
+        - "{{ ansible_host }}"
+        - "{{ ansible_facts.net_hostname }}"
+        - "{{ ansible_facts.net_version }}"
+        - "{{ ansible_user }}"
+        - "{{ ansible_config_file }}"
+        - "{{ inventory_file }}"

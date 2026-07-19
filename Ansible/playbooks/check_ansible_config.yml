@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Show config file
+      debug:
+        var: ansible_config_file
