@@ -9,7 +9,6 @@
         msg:
           - "{{ ansible_config_file }}"
           - "{{ inventory_file }}"
-          - "{{ ansible_facts }}"
 
     - name: Print Router hostname
       ansible.builtin.debug:
