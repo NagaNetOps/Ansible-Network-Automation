@@ -1,0 +1,17 @@
+---
+- name: Playbook Demo
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Configure IP Domain Name
+      cisco.ios.ios_config:
+        lines:
+          - "ip domain name {{ ip_domain_name }}"
+      register: ip_domain_config
+
+    - name: Print Configuration Result
+      ansible.builtin.debug:
+        var: ip_domain_config
+
+ 

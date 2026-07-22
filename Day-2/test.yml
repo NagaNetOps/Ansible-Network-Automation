@@ -5,8 +5,8 @@
   tasks:
     - name: Print hostname,IP,Version & username
       ansible.builtin.debug:
-       msg:
-        - "{{ ansible_host }}"
-        - "{{ ansible_facts.net_hostname }}"
-        - "{{ ansible_facts.net_version }}"
-        - "{{ ansible_user }}"
+        msg:
+          - "{{ ansible_host }}"
+          - "{{ ansible_facts.net_hostname }}"
+          - "{{ ansible_facts.net_version }}"
+          - "{{ ansible_user }}"
