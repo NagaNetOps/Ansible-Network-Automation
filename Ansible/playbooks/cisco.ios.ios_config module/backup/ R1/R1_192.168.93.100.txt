@@ -1,0 +1,178 @@
+Building configuration...
+
+Current configuration : 3654 bytes
+!
+! Last configuration change at 05:07:08 UTC Thu Jul 23 2026
+!
+version 17.18
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain name Ganapathi.com
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2039810
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2039810
+ revocation-check none
+ rsakeypair TP-self-signed-2039810
+ hash sha512
+!
+!
+crypto pki certificate chain TP-self-signed-2039810
+ certificate self-signed 01
+  3082032A 30820212 A0030201 02020101 300D0609 2A864886 F70D0101 0D050030 
+  2E312C30 2A060355 04030C23 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32303339 38313030 1E170D32 36303631 35313532 3635395A 
+  170D3336 30363134 31353236 35395A30 2E312C30 2A060355 04030C23 494F532D 
+  53656C66 2D536967 6E65642D 43657274 69666963 6174652D 32303339 38313030 
+  82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 82010100 
+  B788734C 60FB36E7 9EA91591 CD5E053A 990BBABB 27C8453A 43F0BB9B 0773830B 
+  21F7AE2F 2B94AA10 AC264DE3 8ADD5422 044EF895 86C52ABC 47696E84 43160DE9 
+  7F9B3095 F76CC4D7 3127662E 02A738AC FF2631F5 FC2C99C4 87540EE8 AB5B3505 
+  E0D2E939 169EEF1C 13FD98AC B4425981 53F0EB25 0A10AC3C B341E2D4 04D85378 
+  903A251E 533EE755 4252E16D AFEA8A7C 340C41AB 1A793862 5E4EA10C D1C13BDC 
+  789DDEF5 4D28F333 DA6B7758 C5984DB6 94ECA2E3 1445B5E4 768B7624 B62B9510 
+  23E4069C 498D1AA2 A5AF8512 A1000701 D6CA7069 6DB51A34 D3E3E017 0E76D0BC 
+  7B70A590 29FEF423 68B5E336 675E4C6A 59137E94 E925B89A D9A9DD10 A2F50AC7 
+  02030100 01A35330 51301D06 03551D0E 04160414 62C19D55 77CE1091 8C77AD6B 
+  7D9B8BA5 99AEC1B8 301F0603 551D2304 18301680 1462C19D 5577CE10 918C77AD 
+  6B7D9B8B A599AEC1 B8300F06 03551D13 0101FF04 05300301 01FF300D 06092A86 
+  4886F70D 01010D05 00038201 01000CB2 8FD5104E E161665E 62C33B5C 6F1F4A9A 
+  C627AF7F 89F33CDF DD3A53C7 D77C12DA 0851699B 185E3D13 DA35A791 C8A5D969 
+  E4DF2D62 70192EC0 96C40DE1 75E9906B 1A33A6BA 4C9012FD 080BD1D3 21D89C8D 
+  F931FBFB F0DE79FE BD825123 D640115F 58B36C57 F9BA8147 AA188B1E 67B3B398 
+  04AE1E82 38490B85 615023B8 8A8E1E30 5C3CCFEB EBEF45F0 B74B879E 8FE712EB 
+  89AF0E19 0F560E02 DA138970 1762514D 41F33883 D8A89915 E4934B78 37716967 
+  0172A474 602EF099 BEB8DFBD EBA89C38 7572637D 91634508 847F8B15 247A560B 
+  82A8535C 4E59C257 17501614 F4A26388 5E7937A1 BFB9B9EF 9CAE67FC 86D9DDA8 
+  139E6015 20A98080 975C8711 1B0E
+  	quit
+!
+!
+memory free low-watermark processor 79866
+!
+!
+spanning-tree mode rapid-pvst
+!
+enable password Gana@123
+!
+username ganapathi privilege 15 password 0 Gana@123
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 192.168.93.100 255.255.255.0
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+interface Serial1/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+!
+!
+ip http server
+ip http secure-server
+ip ssh bulk-mode 131072
+ip ssh pubkey-chain
+ username siri
+  key-hash ssh-ed25519 75576988E1359532295CDCC6AB697136 ganapathi@Ganapathi
+no logging btrace
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ activation-character 13
+ logging synchronous
+line aux 0
+ activation-character 13
+line vty 0 4
+ activation-character 13
+ login local
+ transport input ssh
+!
+!
+!
+!
+end

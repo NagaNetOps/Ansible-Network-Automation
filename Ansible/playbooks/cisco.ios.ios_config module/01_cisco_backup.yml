@@ -1,0 +1,16 @@
+---
+- name: Configure domain name
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Take Backup 
+      cisco.ios.ios_config:
+        backup: yes
+        backup_options:
+          dir_path: /home/ganapathi/Documents/Ansible-Network-Automation/Ansible/playbooks/cisco.ios.ios_config module/backup/ {{ inventory_hostname }}/
+          filename: "{{ inventory_hostname }}_{{ ansible_ssh_host }}.txt"
+      register: domain_config 
+    
+    - name: Print Command Output
+      ansible.builtin.debug:
+        msg: "{{ domain_config }}"
