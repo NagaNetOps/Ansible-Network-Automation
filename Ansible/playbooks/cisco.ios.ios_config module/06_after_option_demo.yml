@@ -1,0 +1,30 @@
+---
+- name: Configure interface playbook
+  hosts: R2
+  gather_facts: false
+  tasks:
+    - name: Configure interface
+      cisco.ios.ios_config:
+        lines:
+          - description connected_to_Uplink
+          - ip address 10.10.10.1 255.255.255.0
+        # - no shutdown ----Not required here
+        parents: interface Ethernet0/1
+        after: no shutdown
+      register: intf_config
+    
+    - name: Print Command Output
+      ansible.builtin.debug:
+        msg: "{{ intf_config }}"
+
+    - name: Execute show ip interface
+      cisco.ios.ios_command:
+        commands: 
+          - show run int Ethernet0/1
+          - show ip interface brief
+      register: intf_cmd
+
+    - name: Print Command Output
+      ansible.builtin.debug:
+        msg: "{{ intf_cmd.stdout_lines }}"
+# if we give no shut option in config  lines, imediately we are priniting output but interface up will take 3-4 sec for that we use after syntax.

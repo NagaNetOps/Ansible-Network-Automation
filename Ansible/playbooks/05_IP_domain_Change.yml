@@ -2,6 +2,9 @@
 - name: Playbook Demo
   hosts: all
   gather_facts: true
+  
+  vars:
+    ip_domain_name: example.com
 
   tasks:
     - name: Configure IP Domain Name
@@ -14,4 +17,10 @@
       ansible.builtin.debug:
         var: ip_domain_config
 
- 
+# we can pass above vars in many ways 
+#1. we can define in group vars/ create file  all.yml file or specific group host file in that add ip_domain_name=example.com 
+#2.we can add in inventory file like this 
+#[ios]
+#router1 ansible_host=192.168.1.1 ip_domain_name=example.com
+#3. we can pass it as an extra variable 
+#ansible-playbook playbook.yml -e "ip_domain_name=example.com"

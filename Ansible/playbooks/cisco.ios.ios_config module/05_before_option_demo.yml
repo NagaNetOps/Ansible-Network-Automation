@@ -1,0 +1,37 @@
+---
+- name: Configure acl name
+  hosts: R2
+  gather_facts: false
+  tasks:
+    - name: Configure acl
+      cisco.ios.ios_config:
+        lines:
+          - 10 permit ip host 192.168.2.1 any
+          - 20 permit ip host 192.168.2.20 any
+          - 30 permit ip host 192.168.2.3 any
+          - 40 permit ip host 192.168.2.4 any 
+          - 50 permit ip host 192.168.2.5 any  
+          - 60 permit ip host 192.168.2.6 any    #Newely added                
+        parents: ip access-list extended demo_acl
+        before: no ip access-list extended demo_acl
+        match: exact
+      register: acl_config  
+
+    - name: Print ACL Config
+      ansible.builtin.debug:
+        msg: "{{ acl_config }}"
+
+    - name: Execute show ip access list
+      cisco.ios.ios_command:
+        commands: show ip access-list
+      register: acl_cmd
+
+    - name: Print show ip access list
+      ansible.builtin.debug:
+        msg: "{{ acl_cmd.stdout_lines }}"  
+
+# parent option means we have to enter main command that what we configure in global config mode
+# in this playbook i want to update one more line  and changed ip from 2.2 to 2.20 in 20 order list.
+# First run this playook without before and run after before
+#if i run this playbook new line add but current 20 line or list will not update bcz it condiered already 20 list there.
+# for that we have to use before & match syntax.

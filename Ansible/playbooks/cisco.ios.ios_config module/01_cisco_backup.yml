@@ -1,16 +1,15 @@
 ---
-- name: Configure domain name
+- name: Config Backup
   hosts: all
   gather_facts: false
   tasks:
-    - name: Take Backup 
-      cisco.ios.ios_config:
-        backup: yes
-        backup_options:
-          dir_path: /home/ganapathi/Documents/Ansible-Network-Automation/Ansible/playbooks/cisco.ios.ios_config module/backup/ {{ inventory_hostname }}/
-          filename: "{{ inventory_hostname }}_{{ ansible_ssh_host }}.txt"
-      register: domain_config 
+  - name: Config Backup
+    cisco.ios.ios_config:
+      backup: yes
+    register: config_Backup 
     
-    - name: Print Command Output
-      ansible.builtin.debug:
-        msg: "{{ domain_config }}"
+  - name: Print Command Output
+    ansible.builtin.debug:
+        msg: "{{ config_Backup  }}"
+
+# config backup without any dedicated or specific folder and specific filename.it will create one backup folder within same directory it will add config files in that directory.

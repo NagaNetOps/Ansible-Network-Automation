@@ -1,0 +1,19 @@
+---
+- name: Playbook Demo
+  hosts: R2
+  gather_facts: false
+
+  vars:
+    ip_domain_name: NagaNetops.com
+
+  tasks:
+    - name: Configure IP Domain Name
+      cisco.ios.ios_config:
+        lines:
+          - "ip domain name {{ ip_domain_name }}"
+        save_when: changed
+      register: ip_domain_config
+
+    - name: Print Configuration Result
+      ansible.builtin.debug:
+        var: ip_domain_config
